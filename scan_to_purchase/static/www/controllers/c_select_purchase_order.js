@@ -20,9 +20,10 @@ angular.module('scan_to_purchase').controller(
         }
     });
 
-    $scope.selectPurchaseOrder = function (id, name) {
+    $scope.selectPurchaseOrder = function (id, name, partner_id) {
         $rootScope.currentPurchaseOrderId = id;
         $rootScope.currentPurchaseOrderName = name;
+        $rootScope.currentPartnerId = partner_id;
         $state.go('select_product');
     };
 

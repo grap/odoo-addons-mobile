@@ -21,25 +21,21 @@
                     <span class="input-label">{{product.name}}</span>
                 </label>
 
-                <label class="item item-input">
-                    <div class="input-label">{{'Qty' | translate}}</div>
-                    <span class="input-label">{{product.qty_available}} / {{product.virtual_available}}</span>
-                </label>
+                <div ng-repeat="extra_field in product">
+                    <label class="item item-input" ng-if="extra_field.field_name">
+                        <div class="input-label">{{extra_field.field_name}}</div>
+                        <span class="input-label">{{extra_field.value}}</span>
+                    </label>
+                </div>
 
-                <label class="item item-input">
-                    <div class="input-label">{{'UoM' | translate}}</div>
-                    <span class="input-label">{{product.uom_id[1]}}</span>
-                </label>
+                <div ng-repeat="extra_field in product.seller_ids[currentPartnerId]">
+                    <label class="item item-input" ng-if="extra_field.field_name">
+                        <div class="input-label">{{extra_field.field_name}}</div>
+                        <span class="input-label">{{extra_field.value}}</span>
+                    </label>
+                </div>
 
-                <label class="item item-input">
-                    <div class="input-label">{{'Int. Ref.' | translate}}</div>
-                    <span class="input-label">{{product.default_code}}</span>
-                </label>
 
-                <label class="item item-input">
-                    <div class="input-label">{{'EAN 13' | translate}}</div>
-                    <span class="input-label">{{product.ean13}}</span>
-                </label>
             </div>
         </form>
         <audio id="sound_quantity_selected" src="./static/audio/quantity_selected.mp3"></audio>

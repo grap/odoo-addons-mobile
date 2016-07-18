@@ -13,7 +13,7 @@
                 </label>
                 <ion-list>
                     <ion-item ng-repeat="order in data.purchase_order_list">
-                        <a class="item" href="#" ng-click="selectPurchaseOrder({{order.id}},{{order.name}})">
+                        <a class="item" href="#" ng-click="selectPurchaseOrder({{order.id}}, {{order.name}}, {{order.partner_id[0]}})">
                             <span class="badge badge-energized" ng-show="order.amount_total">
                                 {{order.amount_total | currency:"€"}} {{'VAT Incl.' | translate}}
                             </span>

@@ -22,6 +22,7 @@ angular.module('scan_to_purchase').controller(
 
     $scope.selectSupplier = function (partner_id) {
         PurchaseOrderModel.CreatePurchaseOrder(partner_id).then(function(order_res){
+            $rootScope.currentPartnerId = partner_id;
             $rootScope.currentPurchaseOrderId = order_res;
             $state.go('select_product');
         });

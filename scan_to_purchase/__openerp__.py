@@ -14,6 +14,9 @@
         'purchase',
         'stock',
     ],
+    'data': [
+        'views/view_res_company.xml',
+    ],
     'demo': [
         'demo/res_groups.yml',
         'demo/product_product.yml',
