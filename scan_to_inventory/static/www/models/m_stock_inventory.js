@@ -30,10 +30,10 @@ angular.module('scan_to_inventory').factory(
                 return res.records[0];
             });
         },
-        AddInventoryLine: function(inventoryId, locationId, productId, quantity) {
+        AddInventoryLine: function(inventoryId, locationId, productId, quantity, mode) {
             return jsonRpc.call(
                     'stock.inventory', 'add_inventory_line_by_scan',
-                    [inventoryId, locationId, productId, quantity]).then(function (res) {
+                    [inventoryId, locationId, productId, quantity, mode]).then(function (res) {
                 return res;
             });
         },

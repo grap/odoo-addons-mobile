@@ -23,6 +23,7 @@
     "Loading Failed": "Chargement en échec",
 
     "Inventories": "Inventaires",
+    "Inventory Name": "Nom de l'inventaire",
     "Create New Inventory": "Créer un nouvel inventaire",
     "Line(s)": "Ligne(s)",
 
@@ -39,6 +40,7 @@
     "Add": "Ajouter",
     "Qty": "Qté",
     "Incorrect Quantity": "Quantité incorrecte",
+    "Too Many Duplicate Lines": "Trop de lignes en doublon",
     "Too Big Quantity": "Quantité trop grande",
     "Too Small Quantity": "Quantité trop petite",
 

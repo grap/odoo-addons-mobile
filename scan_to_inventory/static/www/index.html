@@ -58,6 +58,7 @@
         <script src="controllers/c_select_stock_location.js"></script>
         <script src="controllers/c_select_product_product.js"></script>
         <script src="controllers/c_select_quantity.js"></script>
+        <script src="controllers/c_confirm_quantity.js"></script>
     </head>
 
     <body ng-app="scan_to_inventory">
@@ -78,19 +79,19 @@
                             <i class="icon ion-log-in"></i>{{'Log In' | translate}}
                         </ion-item>
                         <ion-item menu-close class="item-icon-left" href="#/load"
-                                ng-show="['select_stock_inventory', 'select_stock_location', 'select_product_product', 'select_quantity'].indexOf(currentState) != -1">
+                                ng-show="['select_stock_inventory', 'select_stock_location', 'select_product_product', 'select_quantity', 'confirm_quantity'].indexOf(currentState) != -1">
                             <i class="icon ion-refresh"></i>{{'Refresh' | translate}}
                         </ion-item>
                         <ion-item menu-close class="item-icon-left" href="#/select_stock_inventory"
-                                ng-show="['select_stock_location', 'select_product_product', 'select_quantity'].indexOf(currentState) != -1">
+                                ng-show="['select_stock_location', 'select_product_product', 'select_quantity', 'confirm_quantity'].indexOf(currentState) != -1">
                             <i class="icon ion-clipboard"></i>{{'Inventories' | translate}}
                         </ion-item>
                         <ion-item menu-close class="item-icon-left" href="#/select_stock_location"
-                                ng-show="['select_product_product', 'select_quantity'].indexOf(currentState) != -1">
+                                ng-show="['select_product_product', 'select_quantity', 'confirm_quantity'].indexOf(currentState) != -1">
                             <i class="icon ion-home"></i>{{'Locations' | translate}}
                         </ion-item>
                         <ion-item menu-close class="item-icon-left" href="#/logout"
-                                ng-show="['load', 'select_stock_inventory', 'select_stock_location', 'select_product_product', 'select_quantity'].indexOf(currentState) != -1">
+                                ng-show="['load', 'select_stock_inventory', 'select_stock_location', 'select_product_product', 'select_quantity', 'confirm_quantity'].indexOf(currentState) != -1">
                             <i class="icon ion-log-out"></i>{{'Log Out' | translate}}
                         </ion-item>
                     </ion-list>
