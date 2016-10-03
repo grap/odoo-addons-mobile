@@ -72,7 +72,6 @@ angular.module(
     }).state(
         'confirm_quantity', {
             url: '/confirm_quantity/:product_id:current_qty:new_qty',
-//            :current_qty:new_qty
             templateUrl: 'views/v_confirm_quantity.html',
             controller: 'ConfirmQuantityCtrl'
     });
