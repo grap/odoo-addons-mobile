@@ -25,11 +25,6 @@ class StockInventory(Model):
             compute_inventory_line_qty, string='Lines Qty', type='integer'),
     }
 
-    def write(self, cr, uid, ids, vals, context=None):
-        print vals
-        return super(StockInventory, self).write(
-            cr, uid, ids, vals, context=context)
-
     def create_by_scan(
             self, cr, uid, name, context=None):
         vals = self.default_get(
@@ -61,7 +56,6 @@ class StockInventory(Model):
         qty = float(qty)
         product_obj = self.pool['product.product']
         line_obj = self.pool['stock.inventory.line']
-        inventory = self.browse(cr, uid, id, context=context)
         product = product_obj.browse(cr, uid, product_id, context=context)
 
         # Check if there is existing line with the product
