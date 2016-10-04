@@ -35,7 +35,7 @@ angular.module('scan_to_inventory').controller(
                         $scope.doneMessage = $translate.instant("Loading Done");
                         setTimeout(function(){
                             $state.go('select_stock_inventory');
-                        }, 2000);
+                        }, 1000);
                     }, function(reason) {
                         $scope.LoadingError();
                     });
