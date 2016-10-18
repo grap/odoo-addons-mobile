@@ -46,5 +46,13 @@
 
     "Something Wrong Happened": "Quelquechose ne s'est pas passé comme prévu",
 
+    "Duplicate Lines": "Lignes en doublons",
+    "Existing Quantity": "Quantité Actuelle",
+    "Filled Quantity": "Quantité Renseignée",
+    "Sum": "Somme",
+    "Add To the Current Quantity": "Ajouter à la quantité actuelle",
+    "Substitution": "Remplacement",
+    "Replace by the Filled Quantity": "Remplacer par la quantité renseignée",
+
     "": ""
 }

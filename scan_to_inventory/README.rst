@@ -178,6 +178,8 @@ Roadmap / Current Limits
   be great to have a generic 'web_ionic' module that have all tools to avoid
   to duplicate files;
 
+* Extra Fields Names are displayed only in english;
+
 Known Issues
 ------------
 
