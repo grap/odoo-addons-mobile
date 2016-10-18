@@ -57,7 +57,7 @@ Product Selection and Quantity Selection
 Once the stock inventory is created or selected, the user can select a product,
 scanning a barcode.
 
-.. image:: /scan_to_inventory/static/src/img/06_phone_select_product
+.. image:: /scan_to_inventory/static/src/img/06_phone_select_product.png
 
 If the EAN13 barcode is recognized, user has to set a quantity to inventory and
 then validate.
