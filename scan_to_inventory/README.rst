@@ -86,6 +86,9 @@ In the company form, admin user can set extra fields that will be displayed
 when a product is scanned. A typical use case is to display stock quantity
 information.
 
+This feature is interesting to display easily and without custom developpement
+extra fields of the core, or custom extra fields.
+
 .. image:: /scan_to_inventory/static/src/img/res_company_configuration.png
 
 
