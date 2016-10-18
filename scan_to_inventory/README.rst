@@ -21,15 +21,15 @@ Authentication
 The first screen asks Odoo credentials. The user should be member of the Odoo
 'Warehouse / User' group.
 
-.. image:: /scan_to_inventory/static/src/img/phone_authentication.png
+.. image:: /scan_to_inventory/static/src/img/01_phone_authentication.png
 
 Data Loading
 ------------
 
-Once authenticated, some datas are cached : Active Products, and draft Stock
-Inventories.
+Once authenticated, some datas are cached : Active Products, Stock locations
+and draft inventories.
 
-.. image:: /scan_to_inventory/static/src/img/phone_data_loading.png
+.. image:: /scan_to_inventory/static/src/img/02_phone_data_loading.png
 
 Inventory Selection
 -------------------
@@ -37,12 +37,18 @@ Inventory Selection
 Once datas are loaded, user can select an existing draft stock inventory he
 want to complete.
 
-.. image:: /scan_to_inventory/static/src/img/phone_select_stock_inventory.png
+.. image:: /scan_to_inventory/static/src/img/04_phone_select_stock_inventory.png
+
+Alternatively, user can create a new stock inventory, tipping an inventory name.
 
 
-Alternatively, user can create a new stock inventory.
+Location Selection
+------------------
 
-.. image:: /scan_to_inventory/static/src/img/XXXX.png
+Once the inventory created (or selected), user has to select the location where
+he is for the time being.
+
+.. image:: /scan_to_inventory/static/src/img/05_select_stock_location.png
 
 
 Product Selection and Quantity Selection
@@ -51,23 +57,39 @@ Product Selection and Quantity Selection
 Once the stock inventory is created or selected, the user can select a product,
 scanning a barcode.
 
-.. image:: /scan_to_inventory/static/src/img/phone_select_product.png
+.. image:: /scan_to_inventory/static/src/img/06_phone_select_product
 
-If the EAN13 barcode is recognized, some informations are displayed to be
-sure that the product is the good one (name, internal code) and other
-informations related to stock (quantity on hand and forecasted quantity)
-User has to set a quantity to inventory and then validate.
+If the EAN13 barcode is recognized, user has to set a quantity to inventory and
+then validate.
 
-.. image:: /scan_to_inventory/static/src/img/phone_select_quantity.png
+.. image:: /scan_to_inventory/static/src/img/07_phone_select_quantity.png
 
+If a line with the same product (and same location) already exist, an extra
+screen is display to mention wich action to. (sum quantity, or replace the old
+value by the one).
+
+.. image:: /scan_to_inventory/static/src/img/08_phone_duplicate_lines.png
 
 Menu
 ----
 
-A menu is available in each screen that allows user to navigates between
+A menu is available in each screen that allows user to navigate between
 screens.
 
-.. image:: /scan_to_inventory/static/src/img/phone_menu.png
+.. image:: /scan_to_inventory/static/src/img/03_phone_menu.png
+
+
+Extra Fields
+------------
+
+In the company form, admin user can set extra fields that will be displayed
+when a product is scanned. A typical use case is to display stock quantity
+information.
+
+.. image:: /scan_to_inventory/static/src/img/res_company_configuration.png
+
+
+.. image:: /scan_to_inventory/static/src/img/07_phone_select_quantity_extra_data.png
 
 
 Technical Informations
@@ -108,10 +130,8 @@ Available languages
 * English
 * French
 
-If you want to use other languages :
-
-* sudo apt-get install npm
-* npm install grunt-angular-translate
+If you want to use other languages just copy past the french translation file
+in the 'static/www/i18n' sub folder and propose new translation.
 
 Similar Projects
 ----------------
@@ -133,7 +153,13 @@ http//localhost:8069/scan_to_inventory/static/www/index.html
 Configuration
 =============
 
-* No extra configuration is needed.
+* Optionnaly, admin user can select extra fields to display. (see above)
+
+* Language is displayed, depending on the languages provided by the browser.
+ If you want to manually change it, you can to do so on firefox:
+
+    * go to about:config
+    * Change the value of the key 'intl.accept_languages'
 
 Credits
 =======
