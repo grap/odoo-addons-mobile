@@ -21,4 +21,5 @@
         'demo/res_groups.yml',
         'demo/product_product.yml',
     ],
+    'installable': True,
 }

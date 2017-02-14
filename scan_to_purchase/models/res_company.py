@@ -14,7 +14,7 @@ class ResCompany(Model):
         'scan_purchase_product_fields_ids': fields.many2many(
             'ir.model.fields', 'res_company_product_fields_rel',
             'config_id', 'field_id', string='Product Fields',
-            domain=[('model', 'in', ['product.template', 'product.product'])]),
+            domain=[('model', 'in', ['product.product'])]),
         'scan_purchase_supplierinfo_fields_ids': fields.many2many(
             'ir.model.fields', 'res_company_supplierinfo_fields_rel',
             'config_id', 'field_id', string='Supplier Info Fields',
