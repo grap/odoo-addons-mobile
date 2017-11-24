@@ -71,6 +71,8 @@ angular.module(
             controller: 'SelectQuantityCtrl'
     });
 
+    $ionicConfigProvider.views.transition('none');
+
     $urlRouterProvider.otherwise('login');
 
     $translateProvider.useStaticFilesLoader({
