@@ -20,7 +20,6 @@ class TestModule(TransactionCase):
         self.line_1_2 = self.env.ref(
             'stock_inventory_merge.inventory_line_1_2')
         self.inventory_2 = self.env.ref('stock_inventory_merge.inventory_2')
-        # Change default rounding to avoid error in rounding computation
 
     # Test Section
     def test_01_block_done_inventory(self):

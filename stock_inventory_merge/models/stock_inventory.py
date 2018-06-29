@@ -37,6 +37,26 @@ class StockInventory(models.Model):
 
     # Action Section
     @api.multi
+    def complete_with_zero(self):
+        line_obj = self.env['stock.inventory.line']
+        for inventory in self:
+            product_lines = inventory._get_inventory_lines()
+            current_vals = inventory._get_inventory_line_vals()
+            for product_line in product_lines:
+                # Check if the line is in the inventory
+                found = False
+                for item in current_vals:
+                    if self._get_inventory_line_keys(item) ==\
+                            self._get_inventory_line_keys(product_line):
+                        print ">>>>>>>>>>> FOUND"
+                        found = True
+                        continue
+                if found:
+                    # Add the line, if inventory line was not found
+                    line_vals['product_qty'] = 0
+                    line_obj.create(product_line)
+
+    @api.multi
     def action_merge_duplicated_line(self):
         uom_obj = self.env['product.uom']
         line_obj = self.env['stock.inventory.line']
@@ -100,5 +120,12 @@ class StockInventory(models.Model):
     def _get_inventory_line_keys(self, values):
         res = []
         for field in self._INVENTORY_LINE_KEY_FIELDS:
+            if values.get(field, False):
+                if type(values.get(field)) is tuple:
+                    res.append(values.get(field)[0])
+                else:
+                    res.append(values.get(field))
+            else:
+                res.append(False)
             res.append(values.get(field) and values.get(field)[0] or False)
         return str(res)
