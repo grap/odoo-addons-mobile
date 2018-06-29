@@ -51,13 +51,14 @@ class TestModule(TransactionCase):
             active_ids=to_merge_inventory_ids,
             active_model='stock.inventory',
         ).create({})
-        result = wizard.action_merge()
+        wizard.action_merge()
         inventories = self.inventory_obj.search(
             [('id', 'in', to_merge_inventory_ids)])
         self.assertEqual(
             len(inventories), 2,
             "Merge Wizard Inventories should not delete inventories.")
-        new_inventory = self.inventory_obj.browse([result['res_id']])
+        new_inventory = self.inventory_obj.search(
+            [('name', '=', 'Merged Inventory')])
         self.assertEqual(
             len(new_inventory.line_ids), len(inventories.mapped('line_ids')),
             "Merging 2 inventories should create a new one with the lines."

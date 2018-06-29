@@ -49,7 +49,5 @@ class WizardStockInventoryMerge(models.TransientModel):
 
         # Return the action focused on the created inventory
         action_data = self.env.ref('stock.action_inventory_form').read()[0]
-        view = self.env.ref('stock.view_inventory_tree')
-        action_data['views'] = [(view.id, 'form')]
         action_data['res_id'] = inventory.id
         return action_data

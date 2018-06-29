@@ -40,6 +40,19 @@ class StockInventory(models.Model):
 
     # Action Section
     @api.multi
+    def action_view_duplicates_lines(self):
+        action = self.env.ref(
+            'stock_inventory_merge.action_stock_inventory_line_duplicates')
+        action_data = action.read()[0]
+        duplicates_list = self._get_duplicated_line_ids()
+        duplicate_ids = []
+        for duplicates in duplicates_list:
+            duplicate_ids += duplicates
+        action_data['domain'] = "[('id','in',[" +\
+            ','.join(map(str, duplicate_ids)) + "])]"
+        return action_data
+
+    @api.multi
     def complete_with_zero(self):
         line_obj = self.env['stock.inventory.line']
         for inventory in self:
