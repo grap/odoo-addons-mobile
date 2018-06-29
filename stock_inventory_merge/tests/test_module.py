@@ -15,11 +15,15 @@ class TestModule(TransactionCase):
         self.line_obj = self.env['stock.inventory.line']
         self.wizard_obj = self.env['wizard.stock.inventory.merge']
         self.inventory_1 = self.env.ref('stock_inventory_merge.inventory_1')
+        self.stock_location = self.env.ref('stock.stock_location_stock')
+        self.component_location = self.env.ref(
+            'stock.stock_location_components')
         self.line_1_1 = self.env.ref(
             'stock_inventory_merge.inventory_line_1_1')
         self.line_1_2 = self.env.ref(
             'stock_inventory_merge.inventory_line_1_2')
         self.inventory_2 = self.env.ref('stock_inventory_merge.inventory_2')
+        self.ipad_product = self.env.ref('product.product_product_6')
 
     # Test Section
     def test_01_block_done_inventory(self):
@@ -58,3 +62,39 @@ class TestModule(TransactionCase):
             len(new_inventory.line_ids), len(inventories.mapped('line_ids')),
             "Merging 2 inventories should create a new one with the lines."
             " of all the merged inventories.")
+
+    def test_04_fill_with_zero(self):
+        new_inventory_1 = self.inventory_obj.create({
+            'name': 'TEST #1',
+            'filter': 'partial',
+            'location_id': self.stock_location.id,
+        })
+        new_inventory_1.prepare_inventory()
+        new_inventory_2 = new_inventory_1.copy(default={'name': 'TEST #2'})
+        self.line_obj.create({
+            'product_id': self.ipad_product.id,
+            'location_id': self.component_location.id,
+            'inventory_id': new_inventory_2.id,
+        })
+        new_inventory_2.prepare_inventory()
+        new_inventory_1.complete_with_zero()
+        new_inventory_2.complete_with_zero()
+
+        self.assertEqual(
+            len(new_inventory_1.line_ids), len(new_inventory_2.line_ids),
+            "complete an empty and a non empty inventory should return the"
+            " same product list")
+
+        # We confirm an inventory that set all product to 0
+        new_inventory_1.action_done()
+
+        new_inventory_3 = self.inventory_obj.create({
+            'name': 'TEST #3',
+            'filter': 'partial',
+            'location_id': self.stock_location.id,
+        })
+        new_inventory_3.prepare_inventory()
+        new_inventory_3.complete_with_zero()
+        self.assertEqual(
+            len(new_inventory_3.line_ids), 0,
+            "If stock are null, complete with 0 process should not add lines.")

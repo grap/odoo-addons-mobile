@@ -40,7 +40,7 @@ class StockInventory(models.Model):
     def complete_with_zero(self):
         line_obj = self.env['stock.inventory.line']
         for inventory in self:
-            product_lines = inventory._get_inventory_lines()
+            product_lines = inventory._get_inventory_lines(inventory)
             current_vals = inventory._get_inventory_line_vals()
             for product_line in product_lines:
                 # Check if the line is in the inventory
@@ -48,12 +48,11 @@ class StockInventory(models.Model):
                 for item in current_vals:
                     if self._get_inventory_line_keys(item) ==\
                             self._get_inventory_line_keys(product_line):
-                        print ">>>>>>>>>>> FOUND"
                         found = True
                         continue
-                if found:
+                if not found:
                     # Add the line, if inventory line was not found
-                    line_vals['product_qty'] = 0
+                    product_line['product_qty'] = 0
                     line_obj.create(product_line)
 
     @api.multi
@@ -127,5 +126,4 @@ class StockInventory(models.Model):
                     res.append(values.get(field))
             else:
                 res.append(False)
-            res.append(values.get(field) and values.get(field)[0] or False)
         return str(res)
