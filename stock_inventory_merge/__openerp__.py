@@ -21,6 +21,8 @@
     ],
     'demo': [
         'demo/res_groups.xml',
+        'demo/product_product.xml',
+        'demo/stock_inventory.xml',
     ],
     'installable': True,
 }

@@ -38,29 +38,52 @@ class StockInventory(models.Model):
     # Action Section
     @api.multi
     def action_merge_duplicated_line(self):
+        uom_obj = self.env['product.uom']
         line_obj = self.env['stock.inventory.line']
         for inventory in self:
             line_group_ids = inventory._get_duplicated_line_ids()
             for line_ids in line_group_ids:
+                sum_quantity = 0
+                keeped_line_id = False
+                default_uom_id = False
                 for line_data in line_obj.search_read(
                         [('id', 'in', line_ids)],
-                        ['product_qty', 'product_uom']):
-                    pass
-                    # TODO
+                        ['product_qty', 'product_uom_id']):
+                    if not keeped_line_id:
+                        keeped_line_id = line_data['id']
+                        default_uom_id = line_data['product_uom_id'][0]
+                        sum_quantity = line_data['product_qty']
+                    else:
+                        # Same UoM
+                        if default_uom_id == line_data['product_uom_id'][0]:
+                            sum_quantity += line_data['product_qty']
+                        else:
+                            sum_quantity += uom_obj._compute_qty(
+                                line_data['product_uom_id'][0],
+                                line_data['product_qty'],
+                                to_uom_id=default_uom_id)
+
+                # Update the first line with the sumed quantity
+                keeped_line = line_obj.browse(keeped_line_id)
+                keeped_line.write({'product_qty': sum_quantity})
+
+                # Delete all the other lines
+                line_ids.remove(keeped_line_id)
+                line_obj.browse(line_ids).unlink()
 
     # Custom Section
     @api.multi
     def _get_duplicated_line_ids(self):
         self.ensure_one()
         check_dict = {}
+        duplicates_group_ids = []
         line_vals = self._get_inventory_line_vals()
         for line_val in line_vals:
             key = self._get_inventory_line_keys(line_val)
             if key in check_dict:
                 check_dict[key].append(line_val['id'])
             else:
-                check_dict[key] = ['id']
-        duplicates_group_ids = []
+                check_dict[key] = [line_val['id']]
         for k, v in check_dict.iteritems():
             if len(v) > 1:
                 duplicates_group_ids.append(v)
