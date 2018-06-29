@@ -7,6 +7,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <openerp><data>
 
     <!-- TODO FIXME set state != 'confirm'-->
+    <!-- TODO FIXME move attributes readonly on grap-change-views -->
     <record id="view_stock_inventory_form" model="ir.ui.view">
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock.view_inventory_form" />
@@ -28,6 +29,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </button>
                  </div>
             </xpath>
+            <field name="filter" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="location_id" position="attributes">
+                <attribute name="domain">[('usage', '=', 'internal')]</attribute>
+            </field>
         </field>
     </record>
 

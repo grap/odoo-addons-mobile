@@ -10,6 +10,9 @@ from openerp.exceptions import Warning as UserError
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
+    _order = 'date desc'
+
+    filter = fields.Selection(default='partial')
 
     duplicates_qty = fields.Integer(
         string='Duplicates Quantity', compute='_compute_duplicates_qty')
