@@ -4,12 +4,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from openerp import _, api, models
+from openerp import _, api, fields, models
 from openerp.exceptions import Warning as UserError
 
 
 class WizardStockInventoryMerge(models.TransientModel):
     _name = 'wizard.stock.inventory.merge'
+
+    name = fields.Char(string='Inventory Name', required=True)
 
     @api.multi
     def action_merge(self):
@@ -38,7 +40,7 @@ class WizardStockInventoryMerge(models.TransientModel):
 
         # Create new Inventory and fill with it
         vals = {
-            'name': _('Merged Inventory'),
+            'name': self.name,
             'location_id': locations[0].id,
             'filter': 'partial',
             'state': 'confirm',

@@ -12,7 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <form>
                 <group col="4" />
                 <footer>
-                    <button name="action_merge" string="Merge" type="object" class="oe_highlight"/>
+                    <button name="action_merge" string="Merge Inventories" type="object" class="oe_highlight"/>
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>

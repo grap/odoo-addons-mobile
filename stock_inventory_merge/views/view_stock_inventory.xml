@@ -6,35 +6,28 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <openerp><data>
 
-    <!-- TODO FIXME set state != 'confirm'-->
-    <!-- TODO FIXME move attributes readonly on grap-change-views -->
     <record id="view_stock_inventory_form" model="ir.ui.view">
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock.view_inventory_form" />
         <field name="arch" type="xml">
-            <button name="reset_real_qty" position="attributes">
-                <attribute name="states">draft, cancel, confirm, done</attribute>
-                <attribute name="attrs">{'invisible': ['|', ('filter', 'in', ['partial', 'product']), ('state', '!=', 'disabled')]}</attribute>
-            </button>
+
             <button name="action_done" position="after">
                 <button name="complete_with_zero" type="object" string="Complete With Zero" attrs="{'invisible': ['|', ('duplicates_qty', '!=', 0), ('state', '!=', 'confirm')]}"/>
-                <button name="action_merge_duplicated_line" type="object" string="Merge Duplicated Lines" attrs="{'invisible': ['|', ('duplicates_qty', '=', 0), ('state', '!=', 'confirm')]}" class="oe_highlight"/>
+                <button name="action_merge_duplicates" type="object" string="Merge Duplicates" attrs="{'invisible': ['|', ('duplicates_qty', '=', 0), ('state', '!=', 'confirm')]}" class="oe_highlight"/>
             </button>
             <xpath expr="//div[@class='oe_title']" position="after">
                 <div class="oe_right oe_button_box" name="buttons">
                     <button class="oe_inline oe_stat_button" type="object"
-                            name="action_view_duplicates_lines" icon="fa-copy"
+                            name="action_view_duplicates" icon="fa-copy"
                             attrs="{'invisible': [('duplicates_qty', '=', 0)]}">
-                        <field string="Duplicated Lines" name="duplicates_qty" widget="statinfo"/>
+                        <field string="Duplicates" name="duplicates_qty" widget="statinfo"/>
+                    </button>
+                    <button class="oe_inline oe_stat_button" type="action"
+                            name="%(action_stock_inventory_line_tree)d" icon="fa-list-ul" string="Lines"
+                            attrs="{'invisible': [('line_ids', '=', 0)]}">
                     </button>
                  </div>
             </xpath>
-            <field name="filter" position="attributes">
-                <attribute name="readonly">1</attribute>
-            </field>
-            <field name="location_id" position="attributes">
-                <attribute name="domain">[('usage', '=', 'internal')]</attribute>
-            </field>
         </field>
     </record>
 

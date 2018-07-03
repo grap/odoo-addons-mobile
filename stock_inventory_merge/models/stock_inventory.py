@@ -40,9 +40,9 @@ class StockInventory(models.Model):
 
     # Action Section
     @api.multi
-    def action_view_duplicates_lines(self):
+    def action_view_duplicates(self):
         action = self.env.ref(
-            'stock_inventory_merge.action_stock_inventory_line_duplicates')
+            'stock_inventory_merge.action_view_duplicates_tree')
         action_data = action.read()[0]
         duplicates_list = self._get_duplicated_line_ids()
         duplicate_ids = []
